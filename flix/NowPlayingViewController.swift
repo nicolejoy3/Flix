@@ -8,13 +8,20 @@
 
 import UIKit
 import AlamofireImage
+import KRProgressHUD
+import KRActivityIndicatorView
+
 
 class NowPlayingViewController: UIViewController, UITableViewDataSource {
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
+
     var movies: [[String: Any]] = []
     var refreshControl: UIRefreshControl!
     
     override func viewDidLoad() {
+        
+        
         super.viewDidLoad()
          refreshControl  = UIRefreshControl()
         refreshControl.addTarget(self, action: #selector(NowPlayingViewController.didPullToRefresh(_:)), for: .valueChanged)
@@ -75,7 +82,16 @@ class NowPlayingViewController: UIViewController, UITableViewDataSource {
        
     }
     
+    func tableViewDidStartLoad(_ : UIView)
+    {
+       
+        activityIndicator.startAnimating()
+        
+    }
+    func tableViewDidFinishLoad(_ : UIView)
+    {
 
-
+        activityIndicator.stopAnimating()
+    }
 
 }
